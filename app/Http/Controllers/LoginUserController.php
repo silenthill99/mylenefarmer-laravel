@@ -16,7 +16,14 @@
 
         public function store(Request $request)
         {
-            dd($request->all());
+            $data = $request->validate([
+                'email' => ['required', 'email'],
+                'password' => ['required'],
+            ]);
+
+            Auth::attempt($data);
+
+            return Redirect::route('home');
         }
 
         public function destroy() {

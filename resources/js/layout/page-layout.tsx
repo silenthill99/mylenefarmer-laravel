@@ -2,6 +2,11 @@ import React, { HTMLAttributes, PropsWithChildren } from 'react';
 import { Link, usePage } from '@inertiajs/react';
 import { SharedData } from '@/types';
 
+const NavItemButton = [
+    {name: "Page d'accueil", link: "home"},
+    {name: "Clips", link: "clips.index"}
+]
+
 const PageLayout = ({ children, ...props }: PropsWithChildren<HTMLAttributes<HTMLElement>>) => {
     const { auth } = usePage<SharedData>().props;
     return (
@@ -12,7 +17,7 @@ const PageLayout = ({ children, ...props }: PropsWithChildren<HTMLAttributes<HTM
                     {auth.user ? (
                         <ul className={"flex gap-5"}>
                             <li>
-                                <Link href={""}>Tableau de bord</Link>
+                                <Link href={route("dashboard")}>Tableau de bord</Link>
                             </li>
                             <li>
                                 <Link href={route("logout")} method={"post"}>Se déconnecter</Link>
@@ -24,10 +29,12 @@ const PageLayout = ({ children, ...props }: PropsWithChildren<HTMLAttributes<HTM
                             <li><Link href={route('registered-user.create')}>Créer un compte</Link></li>
                         </ul>
                     )}
-                    <ul>
-                        <li>
-                            <Link href={route('home')}>Page d'accueil</Link>
-                        </li>
+                    <ul className={"flex gap-2"}>
+                        {NavItemButton.map((link, index) => (
+                            <li key={index}>
+                                <Link href={route(link.link)} className={route().current(link.link) ? "underline" : ""}>{link.name}</Link>
+                            </li>
+                        ))}
                     </ul>
                 </nav>
             </header>
@@ -37,5 +44,4 @@ const PageLayout = ({ children, ...props }: PropsWithChildren<HTMLAttributes<HTM
         </div>
     );
 };
-
 export default PageLayout;
