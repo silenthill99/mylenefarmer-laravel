@@ -23,7 +23,7 @@
 
             Auth::attempt($data);
 
-            return Redirect::route('home');
+            return Redirect::intended(route('home', absolute: false));
         }
 
         public function destroy() {

@@ -4,6 +4,8 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import loginUser from '@/routes/login-user';
+import { home } from '@/routes';
 
 type LoginProps = {
     email: string;
@@ -18,7 +20,7 @@ const Login = () => {
 
     function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        post(route('login-user.store'))
+        post(loginUser.store().url)
     }
 
     return (
@@ -41,7 +43,7 @@ const Login = () => {
                         )}
                         <Button className={'mt-6'}>Valider</Button>
                     </form>
-                    <Link className={"font-sans text-cyan-700 hover:underline selection:bg-black selection:text-white"} href={route('home')}>Retour à l'accueil</Link>
+                    <Link className={"font-sans text-cyan-700 hover:underline selection:bg-black selection:text-white"} href={home()}>Retour à l'accueil</Link>
                 </CardContent>
             </Card>
         </div>

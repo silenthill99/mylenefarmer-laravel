@@ -10,9 +10,15 @@ export interface SharedData {
     auth: Auth;
     ziggy: Config & { location: string };
     [key: string]: unknown;
-    can: {
-        admin: boolean;
-    }
+}
+
+export interface Role {
+    users: User[],
+    id: string,
+    name: string,
+    slug: string,
+    created_at?: string,
+    updated_at?: string
 }
 
 export interface User {
@@ -24,4 +30,5 @@ export interface User {
     created_at: string;
     updated_at: string;
     [key: string]: unknown; // This allows for additional properties...
+    role: Role
 }
