@@ -21,7 +21,9 @@
                 'password' => ['required'],
             ]);
 
-            Auth::attempt($data);
+            $remember = $request->boolean('remember');
+
+            Auth::attempt($data, $remember);
 
             return Redirect::intended(route('home', absolute: false));
         }

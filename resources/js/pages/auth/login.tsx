@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import loginUser from '@/routes/login-user';
 import { home } from '@/routes';
+import { Checkbox } from '@/components/ui/checkbox';
 
 type LoginProps = {
     email: string;
@@ -41,6 +42,10 @@ const Login = () => {
                         {errors.password && (
                             <p className={'text-red-600'}>{errors.password}</p>
                         )}
+                        <div className={"mt-6 flex items-center"}>
+                            <Checkbox id={"remember"} name={"remember"}/>
+                            <Label htmlFor={"remember"}>Remember me</Label>
+                        </div>
                         <Button className={'mt-6'}>Valider</Button>
                     </form>
                     <Link className={"font-sans text-cyan-700 hover:underline selection:bg-black selection:text-white"} href={home()}>Retour à l'accueil</Link>

@@ -12,11 +12,11 @@ class ClipController extends Controller
 {
     public function index()
     {
-        $clips = Clip::all();
+        $clipList = Clip::all();
         if (Auth::check()) {
             Auth::user()->load("role");
         }
-        return Inertia::render("clips/index", compact("clips"));
+        return Inertia::render("clips/index", compact("clipList"));
     }
 
     public function store(ClipRequest $request)
