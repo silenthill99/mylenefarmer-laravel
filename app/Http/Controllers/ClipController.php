@@ -3,20 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ClipRequest;
+use App\Http\Resources\ClipResource;
 use App\Models\Clip;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class ClipController extends Controller
 {
+    use AuthorizesRequests;
     public function index()
     {
-        $clipList = Clip::all();
+        $clips = Clip::all();
         if (Auth::check()) {
             Auth::user()->load("role");
         }
-        return Inertia::render("clips/index", compact("clipList"));
+        $can_create = Auth::user()->can("create", Clip::class);
+        return Inertia::render("clips/index", [
+            'clips' => ClipResource::collection($clips),
+            'can_create' => $can_create
+        ]);
     }
 
     public function store(ClipRequest $request)
@@ -50,6 +57,7 @@ class ClipController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Clip::class);
         return Inertia::render("clips/create");
     }
 }
