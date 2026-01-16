@@ -14,6 +14,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post("/logout", [LoginUserController::class, 'destroy'])->name('logout');
     Route::get("/clips/create", [ClipController::class, 'create'])->name('clips.create');
     Route::post("/clips", [ClipController::class, 'store'])->name('clips.store');
+
+    Route::get('/dashboard', function () {
+        return Inertia::render('dashboard');
+    })->name('dashboard');
 });
 
 Route::middleware('guest')->group(function () {

@@ -10,7 +10,7 @@ const Index = () => {
     const { clipList } = usePage<{ clipList: Clips[] }>().props;
     const { auth } = usePage<SharedData>().props;
     return (
-        <PageLayout className={'container mx-auto mt-5 flex flex-col items-start'}>
+        <PageLayout className={'container mx-auto mt-5 flex flex-col items-start pb-20'}>
             {auth.user?.role?.slug === 'admin' && <Button onClick={() => router.visit(clips.create())}>Ajouter une video</Button>}
             <div className={'flex w-full grow flex-col items-center justify-center'}>
                 {clipList.map((clip) => (

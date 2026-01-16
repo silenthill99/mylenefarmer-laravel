@@ -20,7 +20,7 @@
                 'email' => 'florian.graziani@sfr.fr',
                 'email_verified_at' => now(),
                 'password' => bcrypt('Mylene.10'),
-                'remember_token' => Str::random(10),
+                'remember_token' => null,
                 'created_at' => now(),
                 'updated_at' => now()
             ]);

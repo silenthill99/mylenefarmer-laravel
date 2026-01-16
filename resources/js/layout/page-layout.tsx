@@ -1,7 +1,7 @@
 import React, { HTMLAttributes, PropsWithChildren } from 'react';
 import { Link, usePage } from '@inertiajs/react';
 import { SharedData } from '@/types';
-import { home, login, logout } from '@/routes';
+import { dashboard, home, login, logout } from '@/routes';
 import registeredUser from '@/routes/registered-user';
 import clips from '@/routes/clips';
 import { cn } from '@/lib/utils';
@@ -31,7 +31,7 @@ const PageLayout = ({ children, className, ...props}: PropsWithChildren<HTMLAttr
                     {auth.user ? (
                         <ul className={"flex gap-5"}>
                             <li>
-                                <Link href={""}>Tableau de bord</Link>
+                                <Link href={dashboard()}>Tableau de bord</Link>
                             </li>
                             <li>
                                 <Link href={logout()} method={"post"}>Se déconnecter</Link>
