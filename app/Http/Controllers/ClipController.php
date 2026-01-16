@@ -28,6 +28,7 @@ class ClipController extends Controller
 
     public function store(ClipRequest $request)
     {
+        $this->authorize("create", Clip::class);
         $data = $request->validated();
         Clip::create($data);
 

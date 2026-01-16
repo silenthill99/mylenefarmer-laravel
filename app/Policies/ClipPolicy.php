@@ -22,7 +22,7 @@ class ClipPolicy
      */
     public function update(User $user, Clip $clip): bool
     {
-        return false;
+        return $user->role->name === "Admin";
     }
 
     /**
