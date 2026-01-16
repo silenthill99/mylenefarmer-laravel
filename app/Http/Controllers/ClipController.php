@@ -17,9 +17,9 @@ class ClipController extends Controller
     {
         $clips = Clip::all();
         if (Auth::check()) {
-            Auth::user()?->load("role");
+            Auth::user()->load("role");
         }
-        $can_create = Auth::user()->can("create", Clip::class);
+        $can_create = Auth::user()?->can("create", Clip::class);
         return Inertia::render("clips/index", [
             'clips' => ClipResource::collection($clips),
             'can_create' => $can_create
