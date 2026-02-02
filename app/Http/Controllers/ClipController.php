@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ClipRequest;
+use App\Http\Requests\StoreClipRequest;
 use App\Http\Resources\ClipResource;
 use App\Models\Clip;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -26,7 +26,7 @@ class ClipController extends Controller
         ]);
     }
 
-    public function store(ClipRequest $request)
+    public function store(StoreClipRequest $request)
     {
         $this->authorize("create", Clip::class);
         $data = $request->validated();
@@ -40,7 +40,7 @@ class ClipController extends Controller
         return $clip;
     }
 
-    public function update(ClipRequest $request, Clip $clip)
+    public function update(StoreClipRequest $request, Clip $clip)
     {
         $data = $request->validated();
 

@@ -5,13 +5,10 @@ import { SharedData } from '@/types';
 import { Clips } from '@/types/clips';
 import { router, usePage } from '@inertiajs/react';
 import { create } from '@/routes/clips';
-import { useEffect } from 'react';
+import { getVideoId } from '@/components/getVideoId';
 
 const Index = () => {
     const { clips, auth, can_create } = usePage<SharedData & { clips: Clips[], can_create: boolean }>().props;
-    useEffect(() => {
-        console.log(clips)
-    }, [])
     return (
         <PageLayout className={'container mx-auto mt-5 flex flex-col items-start pb-20'}>
             {auth.user && (
@@ -23,11 +20,7 @@ const Index = () => {
                 {clips.map((clip) => (
                     <div key={clip.id} className={'text-center'}>
                         <h2 className={'text-2xl text-red-500'}>{clip.title}</h2>
-                        <YoutubeVideos id={
-                            clip.url
-                                .replace('https://www.youtube.com/watch?v=', '')
-                                .replace('https://youtu.be/', '')}
-                        />
+                        <YoutubeVideos id={getVideoId(clip.url)} />
                     </div>
                 ))}
             </div>
