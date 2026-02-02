@@ -30,7 +30,7 @@ class ClipPolicy
      */
     public function delete(User $user, Clip $clip): bool
     {
-        return false;
+        return $user->role->name === "Admin";
     }
 
     /**
@@ -38,7 +38,7 @@ class ClipPolicy
      */
     public function restore(User $user, Clip $clip): bool
     {
-        return false;
+        return $user->role->name === "Admin";
     }
 
     /**
@@ -46,6 +46,6 @@ class ClipPolicy
      */
     public function forceDelete(User $user, Clip $clip): bool
     {
-        return false;
+        return $user->role->name === "Admin";
     }
 }
