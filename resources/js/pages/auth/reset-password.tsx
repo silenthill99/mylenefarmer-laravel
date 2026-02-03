@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Form, usePage } from '@inertiajs/react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import password from '@/routes/password';
@@ -8,15 +8,7 @@ import { Button } from '@/components/ui/button';
 
 const ResetPassword = () => {
 
-    const {token} = usePage<{token: string}>().props;
-    useEffect(() => {
-        console.log(token);
-        console.log(email);
-    }, [])
-
-    // Pour récupérer l'adresse mail depuis l'URL
-    const url = usePage().url
-    const email = new URL(url, window.location.origin).searchParams.get('email') ?? "";
+    const {token, email} = usePage<{token: string, email: string}>().props;
 
     return (
         <div className={"flex min-h-screen items-center justify-center bg-[url('/assets/images/background.jpg')] bg-cover bg-fixed bg-center"}>
