@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Enums\RoleEnum;
 use App\Models\Clip;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
@@ -14,7 +15,7 @@ class ClipPolicy
      */
     public function create(User $user): bool
     {
-        return $user->role->name === "Admin";
+        return $user->role->name === RoleEnum::ADMIN->value;
     }
 
     /**
