@@ -2,6 +2,7 @@
 
     namespace App\Models;
 
+use App\Enums\RoleEnum;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -49,6 +50,10 @@ class User extends Authenticatable
     {
         static::creating(function ($user) {
             $user->slug = Str::slug($user->name);
+        });
+        static::created(function ($user) {
+            $user->role()->associate(Role::where('name', RoleEnum::DEFAULT->value)->first());
+            $user->save();
         });
     }
 

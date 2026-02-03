@@ -7,6 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import loginUser from '@/routes/login-user';
 import { home } from '@/routes';
 import { Checkbox } from '@/components/ui/checkbox';
+import password from '@/routes/password';
 const Login = () => {
 
     return (
@@ -49,6 +50,7 @@ const Login = () => {
                         )}
                     </Form>
                     <Link className={"font-sans text-cyan-700 hover:underline selection:bg-black selection:text-white"} href={home()}>Retour à l'accueil</Link>
+                    <Link className={"block font-sans text-cyan-700 hover:underline"} href={password.request()}>Mot de passe oublié ?</Link>
                 </CardContent>
             </Card>
         </div>
