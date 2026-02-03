@@ -10,6 +10,9 @@ export interface SharedData {
     auth: Auth;
     ziggy: Config & { location: string };
     [key: string]: unknown;
+    flash: {
+        success: boolean;
+    }
 }
 
 export interface Role {
