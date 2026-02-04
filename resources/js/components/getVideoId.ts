@@ -1,3 +1,9 @@
 export const getVideoId = (link: string) => {
-    return new URL(link).searchParams.get('v') ?? ""
+    const url = new URL(link);
+
+    if (url.hostname === "youtu.be") {
+        return url.pathname.slice(1)
+    }
+
+    return url.searchParams.get('v') ?? ""
 }
