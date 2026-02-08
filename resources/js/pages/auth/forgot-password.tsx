@@ -13,6 +13,7 @@ const ForgotPassword = () => {
     const { flash } = usePage<SharedData>().props;
 
     useEffect(() => {
+        if (!flash.success) return;
         toast.success(flash.success);
     }, [flash.success]);
 
