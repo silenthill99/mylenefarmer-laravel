@@ -23,7 +23,7 @@ class PasswordResetLinkController extends Controller
         );
 
         return $status === Password::ResetLinkSent
-            ? back()->with("status", __($status))
+            ? back()->with("status", __($status))->with("success", "Un email de reset de mot de passe vous a été envoyé.")
             : back()->withErrors(['email' => __($status)]);
     }
 }

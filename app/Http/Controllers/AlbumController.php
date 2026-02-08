@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAlbumRequest;
 use App\Http\Requests\UpdateAlbumRequest;
+use App\Http\Resources\AlbumResource;
 use App\Models\Album;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Redirect;
+use Inertia\Inertia;
 
 class AlbumController extends Controller
 {
@@ -13,7 +18,8 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        //
+        Auth::user()->can('viewAny', Album::class);
+        return Inertia::render('albums/index');
     }
 
     /**
@@ -21,7 +27,8 @@ class AlbumController extends Controller
      */
     public function create()
     {
-        //
+        Gate::authorize('viewAny', Album::class);
+        return Inertia::render('albums/create');
     }
 
     /**
@@ -29,7 +36,14 @@ class AlbumController extends Controller
      */
     public function store(StoreAlbumRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        $image_name = time() . "_" . $data['image']->getClientOriginalName();
+        $data['image_path'] = $data['image']->storeAs('images/albums', $image_name, 'public');
+
+        Album::create($data);
+
+        return redirect()->route('albums.index');
     }
 
     /**
@@ -37,7 +51,9 @@ class AlbumController extends Controller
      */
     public function show(Album $album)
     {
-        //
+        return Inertia::render('albums/show', [
+            'album' => new AlbumResource($album)
+        ]);
     }
 
     /**
@@ -61,6 +77,8 @@ class AlbumController extends Controller
      */
     public function destroy(Album $album)
     {
-        //
+        Gate::authorize('create', $album);
+        $album->delete();
+        return Redirect::route('albums.index')->with('success', "Album supprimé avec succès !");
     }
 }

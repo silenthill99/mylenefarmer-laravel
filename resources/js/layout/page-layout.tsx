@@ -5,6 +5,7 @@ import { dashboard, home, login, logout } from '@/routes';
 import registeredUser from '@/routes/registered-user';
 import clips from '@/routes/clips';
 import { cn } from '@/lib/utils';
+import AlbumController from '@/actions/App/Http/Controllers/AlbumController';
 
 const NavItemButton = [
     {name: "Page d'accueil", link: home},
@@ -12,7 +13,7 @@ const NavItemButton = [
 ]
 
 const PageLayout = ({ children, className, ...props}: PropsWithChildren<HTMLAttributes<HTMLElement> & {className?: string}>) => {
-    const { auth } = usePage<SharedData>().props;
+    const { auth, albums } = usePage<SharedData>().props;
 
     const {url} = usePage();
 
@@ -24,44 +25,56 @@ const PageLayout = ({ children, className, ...props}: PropsWithChildren<HTMLAttr
     }
 
     return (
-        <div
-            className={'min-h-screen bg-[url("/assets/images/background.jpg")] bg-no-repeat bg-fixed bg-cover bg-center flex flex-col'} {...props}>
-            <header className={'border-b border-black p-5 bg-white'}>
+        <div className={'flex min-h-screen flex-col bg-[url("/assets/images/background.jpg")] bg-cover bg-fixed bg-center bg-no-repeat'} {...props}>
+            <header className={'border-b border-black bg-white p-5'}>
                 <nav className={'container mx-auto flex justify-between'}>
                     {auth.user ? (
-                        <ul className={"flex gap-5"}>
+                        <ul className={'flex gap-5'}>
                             <li>
                                 <Link href={dashboard()}>Tableau de bord</Link>
                             </li>
                             <li>
-                                <Link href={logout()} method={"post"}>Se déconnecter</Link>
+                                <Link href={logout()} method={'post'}>
+                                    Se déconnecter
+                                </Link>
                             </li>
                         </ul>
                     ) : (
                         <ul className={'flex gap-5'}>
-                            <li><Link href={login()}>Se connecter</Link></li>
-                            <li><Link href={registeredUser.create()}>Créer un compte</Link></li>
+                            <li>
+                                <Link href={login()}>Se connecter</Link>
+                            </li>
+                            <li>
+                                <Link href={registeredUser.create()}>Créer un compte</Link>
+                            </li>
                         </ul>
                     )}
-                    <ul className={"flex gap-2"}>
+                    <ul className={'flex gap-2'}>
                         {NavItemButton.map((link, index) => (
                             <li key={index}>
-                                <Link href={link.link.url()} className={isActive(link.link.url()) ? "underline" : ""}>{link.name}</Link>
+                                <Link href={link.link.url()} className={isActive(link.link.url()) ? 'underline' : ''}>
+                                    {link.name}
+                                </Link>
                             </li>
                         ))}
-                        <div className={"relative group"}>
-                            <span className={"cursor-pointer"}>Albums</span>
-                            <ul className={"absolute w-50 left-1/2 -translate-x-1/2 text-center bg-white border hidden group-hover:block"}>
-                                <li>Album Cendres de lune</li>
-                                <li>Album Ainsi soit je</li>
+                        <div className={'group relative'}>
+                            <span className={'cursor-pointer'}>Albums</span>
+                            <ul className={'absolute left-1/2 hidden w-50 -translate-x-1/2 border bg-white text-center group-hover:block'}>
+                                {albums.length === 0 ? (
+                                    <p>Aucun album enregistrés en base de données</p>
+                                ) : (
+                                    albums.map((album, index) => (
+                                        <li key={index}>
+                                            <Link href={AlbumController.show({album: album})}>Album {album.title}</Link>
+                                        </li>
+                                    ))
+                                )}
                             </ul>
                         </div>
                     </ul>
                 </nav>
             </header>
-            <main className={cn("grow", className)}>
-                {children}
-            </main>
+            <main className={cn('grow', className)}>{children}</main>
         </div>
     );
 };

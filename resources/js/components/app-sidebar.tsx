@@ -1,12 +1,3 @@
-import { dashboard, home } from '@/routes';
-
-const navItems = [
-    {
-        title: "Dashboard",
-        url: dashboard().url
-    }
-]
-
 import React from 'react';
 import {
     Sidebar,
@@ -18,9 +9,28 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
+import { dashboard, home } from '@/routes';
+import albums from '@/routes/albums';
+
+const navItems = [
+    {
+        title: 'Dashboard',
+        url: dashboard().url,
+    },
+    {
+        title: 'Liste des albums',
+        url: albums.index().url,
+    },
+];
 
 const AppSidebar = () => {
+    const { url } = usePage();
+
+    const isActive = (link: string) => {
+        return url.startsWith(link)
+    }
+
     return (
         <Sidebar variant={"floating"}>
             <SidebarHeader>
@@ -39,7 +49,7 @@ const AppSidebar = () => {
                         <SidebarMenu>
                             {navItems.map((item) => (
                                 <SidebarMenuItem key={item.title}>
-                                    <SidebarMenuButton asChild>
+                                    <SidebarMenuButton asChild isActive={isActive(item.url)}>
                                         <Link href={item.url}>{item.title}</Link>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>

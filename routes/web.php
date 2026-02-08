@@ -1,5 +1,6 @@
 <?php /** @noinspection PhpParamsInspection */
 
+use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -20,6 +21,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
+    Route::resource('albums', AlbumController::class);
 });
 
 Route::middleware('guest')->group(function () {

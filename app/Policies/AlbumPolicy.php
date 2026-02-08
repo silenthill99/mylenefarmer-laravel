@@ -13,15 +13,7 @@ class AlbumPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can view the model.
-     */
-    public function view(User $user, Album $album): bool
-    {
-        return false;
+        return $user->can('isAdmin');
     }
 
     /**
@@ -29,7 +21,7 @@ class AlbumPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->can('isAdmin');
     }
 
     /**
@@ -37,7 +29,7 @@ class AlbumPolicy
      */
     public function update(User $user, Album $album): bool
     {
-        return false;
+        return $user->can('isAdmin');
     }
 
     /**
@@ -45,22 +37,6 @@ class AlbumPolicy
      */
     public function delete(User $user, Album $album): bool
     {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Album $album): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Album $album): bool
-    {
-        return false;
+        return $user->can('isAdmin');
     }
 }

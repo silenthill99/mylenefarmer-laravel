@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('albums', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->string('slug');
-            $table->text('tracklist');
-            $table->string('image_path');
-            $table->timestamps();
+        Schema::table('albums', function (Blueprint $table) {
+            $table->string('slug')->unique()->change();
+            $table->string('title')->unique()->change();
         });
     }
 
@@ -26,6 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('albums');
+        Schema::table('albums', function (Blueprint $table) {
+            $table->dropUnique('slug');
+            $table->dropUnique('title');
+        });
     }
 };

@@ -1,15 +1,15 @@
 import React, { PropsWithChildren } from 'react';
-import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
+import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import AppSidebar from '@/components/app-sidebar';
 
 const SidebarLayout = ({children}: PropsWithChildren) => {
     return (
         <SidebarProvider>
             <AppSidebar/>
-            <main>
+            <SidebarInset>
                 <SidebarTrigger/>
                 {children}
-            </main>
+            </SidebarInset>
         </SidebarProvider>
     );
 };

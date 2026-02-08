@@ -10,15 +10,15 @@ import { SharedData } from '@/types';
 import { toast } from 'sonner';
 
 const ForgotPassword = () => {
-    const {flash} = usePage<SharedData>().props
+    const { flash } = usePage<SharedData>().props;
 
     useEffect(() => {
-        toast(flash.success)
-    }, [flash])
+        toast.success(flash.success);
+    }, [flash.success]);
 
     return (
         <AuthenticatedLayout title={'Réinitialiser le mot de passe'}>
-            <Toaster/>
+            <Toaster position={"top-center"} toastOptions={{className: "border-2"}}/>
             <Head title={'Mot de passe oublié'} />
             <Form {...password.email.form()}>
                 {({ errors, processing }) => (

@@ -11,8 +11,9 @@ export interface SharedData {
     ziggy: Config & { location: string };
     [key: string]: unknown;
     flash: {
-        success: boolean;
+        success: string | null;
     }
+    albums: Album[]
 }
 
 export interface Role {
@@ -34,4 +35,14 @@ export interface User {
     updated_at: string;
     [key: string]: unknown; // This allows for additional properties...
     role: Role
+}
+
+export interface Album {
+    id: number;
+    title: string;
+    slug: string;
+    image_path: string;
+    tracklist: string;
+    created_at: string;
+    updated_at: string;
 }

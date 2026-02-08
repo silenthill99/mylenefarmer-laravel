@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Album;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -42,11 +43,12 @@ class HandleInertiaRequests extends Middleware
             ...parent::share($request),
             'name' => config('app.name'),
             'quote' => ['message' => trim($message), 'author' => trim($author)],
+            'albums' => Album::all(),
             'auth' => [
                 'user' => $request->user()
             ],
             'flash' => [
-                "success" => $request->session()->get('success'),
+                'success' => fn () => $request->session()->get('success'),
             ]
         ];
     }
