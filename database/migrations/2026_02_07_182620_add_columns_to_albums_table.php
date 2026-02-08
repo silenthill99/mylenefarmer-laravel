@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('albums', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('albums', function (Blueprint $table) {
+            $table->string('title');
+            $table->text('tracklist');
+            $table->string('image_path');
         });
     }
 
@@ -22,6 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('albums');
+        Schema::table('albums', function (Blueprint $table) {
+            $table->dropColumn(['title', 'tracklist', 'image_path']);
+        });
     }
 };
