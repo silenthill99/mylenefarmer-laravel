@@ -15,7 +15,10 @@ class Album extends Model
         'title',
         'tracklist',
         'image_path',
-        'coming_soon'
+        'coming_soon',
+        'deezer_url',
+        'spotify_url',
+        'apple_music_url',
     ];
 
     public static function booted()
