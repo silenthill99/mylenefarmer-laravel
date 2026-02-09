@@ -45,4 +45,5 @@ export interface Album {
     tracklist: string;
     created_at: string;
     updated_at: string;
+    coming_soon: boolean;
 }

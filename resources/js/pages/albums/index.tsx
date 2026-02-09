@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import SidebarLayout from '@/layout/sidebar-layout';
-import { Link, router, usePage } from '@inertiajs/react';
+import { Head, Link, router, usePage } from '@inertiajs/react';
 import { SharedData } from '@/types';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
@@ -19,6 +19,7 @@ const Index = () => {
 
     return (
         <SidebarLayout>
+            <Head title={"Albums"}/>
             <Toaster position={'top-center'}/>
             <h1 className={'py-5 text-5xl font-bold'}>Liste des albums</h1>
             <Button className={'w-min'} onClick={() => router.visit(AlbumController.create())}>
@@ -44,7 +45,8 @@ const Index = () => {
                                     <Button variant={'destructive'} onClick={() => router.delete(AlbumController.destroy({album: album}))}>
                                         <TrashIcon />
                                     </Button>
-                                    <Button variant={"ghost"}>
+                                    <Button variant={"ghost"} onClick={() => router
+                                        .visit(AlbumController.edit({album: album}))}>
                                         <SquarePenIcon/>
                                     </Button>
                                 </TableCell>

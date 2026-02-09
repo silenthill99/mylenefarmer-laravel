@@ -9,6 +9,7 @@ use App\Models\Album;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class AlbumController extends Controller
@@ -61,7 +62,11 @@ class AlbumController extends Controller
      */
     public function edit(Album $album)
     {
-        //
+        Gate::authorize('update', $album);
+
+        return Inertia::render('albums/edit', [
+            'album' => new AlbumResource($album)
+        ]);
     }
 
     /**
@@ -69,7 +74,17 @@ class AlbumController extends Controller
      */
     public function update(UpdateAlbumRequest $request, Album $album)
     {
-        //
+        Gate::authorize('update', $album);
+        $data = $request->validated();
+        if ($request->hasFile('image')) {
+            $this->deleteImage($album->image_path);
+
+            $image_name = time() . "_" . $data['image']->getClientOriginalName();
+            $data['image_path'] = $data['image']->storeAs('images/albums', $image_name, 'public');
+        }
+
+        $album->update($data);
+        return redirect()->route('albums.show', $album);
     }
 
     /**
@@ -79,6 +94,14 @@ class AlbumController extends Controller
     {
         Gate::authorize('create', $album);
         $album->delete();
+        $this->deleteImage($album->image_path);
         return Redirect::route('albums.index')->with('success', "Album supprimé avec succès !");
+    }
+
+    private function deleteImage(string $image_link)
+    {
+        if (Storage::disk('public')->exists($image_link)) {
+            Storage::disk('public')->delete($image_link);
+        }
     }
 }

@@ -15,7 +15,12 @@ const Show = () => {
                         <li key={index}>{track}</li>
                     ))}
                 </ul>
-                <img className={'w-150'} src={storage.local(album.image_path).url} alt={album.title} />
+                <div className={"relative group"}>
+                    <img className={'w-150'} src={storage.local(album.image_path).url} alt={album.title} />
+                    {album.coming_soon && (
+                        <p className={"absolute bg-white/75 p-5 text-black text-base bottom-0 left-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"}>Sortie prochainement</p>
+                    )}
+                </div>
             </div>
         </PageLayout>
     );

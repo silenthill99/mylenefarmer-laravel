@@ -23,7 +23,10 @@ class UpdateAlbumRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "title" => ["sometimes", "string", "max:255"],
+            "image" => ["sometimes", "image", "mimes:jpeg,jpg,png", "max:8000"],
+            "tracklist" => ["sometimes", "string"],
+            "coming_soon" => ["sometimes", "boolean"]
         ];
     }
 }

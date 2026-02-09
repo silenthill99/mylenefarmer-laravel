@@ -21,8 +21,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
-    Route::resource('albums', AlbumController::class);
+    Route::resource('albums', AlbumController::class)->except('show');
 });
+
+Route::resource('albums', AlbumController::class)->only('show');
 
 Route::middleware('guest')->group(function () {
     Route::get('/register', [RegisteredUserController::class, 'create'])->name('registered-user.create');
