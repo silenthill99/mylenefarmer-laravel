@@ -75,7 +75,7 @@ class AlbumController extends Controller
     public function update(UpdateAlbumRequest $request, Album $album)
     {
         Gate::authorize('update', $album);
-        $data = $request->validated();
+        $data = array_filter($request->validated(), fn ($value) => ! is_null($value));
         if ($request->hasFile('image')) {
             $this->deleteImage($album->image_path);
 

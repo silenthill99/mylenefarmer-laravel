@@ -20,6 +20,9 @@ class AlbumResource extends JsonResource
             "tracklist" => $this->resource->tracklist,
             'image_path' => $this->resource->image_path,
             'coming_soon' => $this->resource->coming_soon,
+            'deezer_url' => $this->resource->deezer_url,
+            'spotify_url' => $this->resource->spotify_url,
+            'apple_music_url' => $this->resource->apple_music_url,
         ];
     }
 }

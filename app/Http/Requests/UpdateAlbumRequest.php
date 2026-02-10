@@ -23,10 +23,13 @@ class UpdateAlbumRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "title" => ["sometimes", "string", "max:255"],
-            "image" => ["sometimes", "image", "mimes:jpeg,jpg,png", "max:8000"],
-            "tracklist" => ["sometimes", "string"],
-            "coming_soon" => ["sometimes", "boolean"]
+            "title" => ["nullable", "string", "max:255"],
+            "image" => ["nullable", "image", "mimes:jpeg,jpg,png", "max:8000"],
+            "tracklist" => ["nullable", "string"],
+            "coming_soon" => ["nullable", "boolean"],
+            "deezer_url" => ["nullable", "string", "url", "regex:/^(?:https?:\/\/)?(?:www\.)?deezer\.com\/[a-z]{2}\/album\/\d+(?:\?.*)?$/"],
+            "spotify_url" => ["nullable", "string", "url", "regex:/^(?:https?:\/\/)?open\.spotify\.com\/intl-[a-z]{2}\/album\/[a-zA-Z0-9]+(?:\?.*)?$/"],
+            "apple_music_url" => ["nullable", "string", "url", "regex:/^https:\/\/music\.apple\.com\/[a-z]{2}\/album\/[a-z-_.]+\/\d+(?:\?.*)?/"]
         ];
     }
 }

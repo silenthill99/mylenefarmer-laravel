@@ -21,7 +21,7 @@ export default function Welcome() {
                 <CarouselContent>
                     {albums.map((album) => (
                         <CarouselItem key={album.id}>
-                            <img className={"h-full w-full object-cover"} src={storage.local(album.image_path).url} alt={album.title} />
+                            <img className={'h-full w-full object-cover'} src={storage.local(album.image_path).url} alt={album.title} />
                         </CarouselItem>
                     ))}
                 </CarouselContent>

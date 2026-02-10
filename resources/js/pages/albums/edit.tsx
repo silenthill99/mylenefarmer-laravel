@@ -24,7 +24,7 @@ const Edit = () => {
     }
 
     return (
-        <PageLayout className={'flex items-center justify-center'}>
+        <PageLayout className={'flex items-center justify-center py-20'}>
             <Head title={"Modifier l'album " + album.title} />
             <Card className={'w-1/2'}>
                 <CardHeader>
@@ -68,6 +68,42 @@ const Edit = () => {
                                         defaultValue={album.tracklist}
                                     />
                                     <InputError message={errors.tracklist}/>
+                                </div>
+                                <div>
+                                    <Label htmlFor={"deezer_url"}>Lien Deezer</Label>
+                                    <Input
+                                        type={"url"}
+                                        id={"deezer_url"}
+                                        name={"deezer_url"}
+                                        placeholder={"Deezer"}
+                                        defaultValue={album.deezer_url}
+                                        aria-invalid={!!errors.deezer_url}
+                                    />
+                                    <InputError message={errors.deezer_url}/>
+                                </div>
+                                <div>
+                                    <Label htmlFor={"spotify_url"}>Lien Spotify</Label>
+                                    <Input
+                                        type={"url"}
+                                        id={"spotify_url"}
+                                        name={"spotify_url"}
+                                        placeholder={"Spotify"}
+                                        defaultValue={album.spotify_url}
+                                        aria-invalid={!!errors.spotify_url}
+                                    />
+                                    <InputError message={errors.spotify_url}/>
+                                </div>
+                                <div>
+                                    <Label htmlFor={'apple_music_url'}>Lien Apple music</Label>
+                                    <Input
+                                        type={"url"}
+                                        id={"apple_music_url"}
+                                        name={"apple_music_url"}
+                                        placeholder={"Apple Music"}
+                                        defaultValue={album.apple_music_url}
+                                        aria-invalid={!!errors.apple_music_url}
+                                    />
+                                    <InputError message={errors.apple_music_url}/>
                                 </div>
                                 <div className={"flex gap-2 items-center"}>
                                     <Input type={"hidden"} name={'coming_soon'} value={0}/>
