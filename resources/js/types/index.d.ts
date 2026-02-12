@@ -46,7 +46,7 @@ export interface Album {
     created_at: string;
     updated_at: string;
     coming_soon: boolean;
-    deezer_url: string;
-    spotify_url: string;
-    apple_music_url: string;
+    deezer_url?: string;
+    spotify_url?: string;
+    apple_music_url?: string;
 }

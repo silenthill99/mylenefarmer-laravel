@@ -27,9 +27,9 @@ const Show = () => {
                 </div>
             </div>
             <div className={"space-y-10"}>
-                <DeezerLink id={getAudioId(album.deezer_url)} />
-                <SpotifyLink id={getAudioId(album.spotify_url)} />
-                <AppleMusicLink id={getAudioId(album.apple_music_url)}/>
+                {album.deezer_url && <DeezerLink id={getAudioId(album.deezer_url)} />}
+                {album.spotify_url && <SpotifyLink id={getAudioId(album.spotify_url)} />}
+                {album.apple_music_url && <AppleMusicLink id={getAudioId(album.apple_music_url)} />}
             </div>
         </PageLayout>
     );
