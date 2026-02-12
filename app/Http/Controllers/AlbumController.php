@@ -19,7 +19,7 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        Auth::user()->can('viewAny', Album::class);
+        Gate::authorize("viewAny", Album::class);
         return Inertia::render('albums/index');
     }
 
