@@ -43,7 +43,7 @@ class HandleInertiaRequests extends Middleware
             ...parent::share($request),
             'name' => config('app.name'),
             'quote' => ['message' => trim($message), 'author' => trim($author)],
-            'albums' => Album::all(),
+            'albums' => Album::query()->select('id', 'title', 'slug', 'image_path')->get(),
             'auth' => [
                 'user' => $request->user()
             ],
