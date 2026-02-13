@@ -50,3 +50,10 @@ export interface Album {
     spotify_url?: string;
     apple_music_url?: string;
 }
+
+export interface MenuNav {
+    name: string,
+    link?: string,
+    isDropdown?: boolean,
+    children?: MenuNav[]
+}
