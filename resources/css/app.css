@@ -139,3 +139,7 @@
         cursor: pointer;
     }
 }
+
+@theme {
+    --breakpoint-3xl: 1600;
+}

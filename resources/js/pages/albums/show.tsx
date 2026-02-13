@@ -11,7 +11,7 @@ const Show = () => {
     const { album } = usePage<{ album: Album }>().props;
     const tracklist: string[] = album.tracklist.split('\n');
     return (
-        <PageLayout className={'container mx-auto text-[32px] text-white mb-20 px-5 md:px-0'}>
+        <PageLayout className={'container mx-auto text-[32px] text-white mb-20 px-5 3xl:px-0'}>
             <h1>Album {album.title}</h1>
             <div className={'my-4 flex flex-col-reverse md:flex-row justify-between'}>
                 <ul>
