@@ -7,6 +7,7 @@ import clips from '@/routes/clips';
 import { cn } from '@/lib/utils';
 import AlbumController from '@/actions/App/Http/Controllers/AlbumController';
 import NavMenuDesktop from '@/components/nav-menu-desktop';
+import NavMenuMobile from '@/components/nav-menu-mobile';
 
 const PageLayout = ({ children, className, ...props}: PropsWithChildren<HTMLAttributes<HTMLElement> & {className?: string}>) => {
     const { auth, albums } = usePage<SharedData>().props;
@@ -28,8 +29,8 @@ const PageLayout = ({ children, className, ...props}: PropsWithChildren<HTMLAttr
 
     return (
         <div className={'flex min-h-screen flex-col bg-[url("/assets/images/background.jpg")] bg-cover bg-fixed bg-center bg-no-repeat'} {...props}>
-            <header className={'border-b border-black bg-white p-5'}>
-                <nav className={'container mx-auto flex justify-between'}>
+            <header className={'relative border-b border-black bg-white p-5 md:[position:revert]'}>
+                <nav className={'container mx-auto flex items-center justify-between'}>
                     {auth.user ? (
                         <ul className={'flex gap-5'}>
                             <li>
@@ -51,7 +52,8 @@ const PageLayout = ({ children, className, ...props}: PropsWithChildren<HTMLAttr
                             </li>
                         </ul>
                     )}
-                    <NavMenuDesktop NavItemButton={NavItemButton}/>
+                    <NavMenuDesktop NavItemButton={NavItemButton} />
+                    <NavMenuMobile NavItemButton={NavItemButton} />
                 </nav>
             </header>
             <main className={cn('grow', className)}>{children}</main>

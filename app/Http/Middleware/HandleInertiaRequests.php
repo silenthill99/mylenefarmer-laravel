@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Models\Album;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -43,7 +44,7 @@ class HandleInertiaRequests extends Middleware
             ...parent::share($request),
             'name' => config('app.name'),
             'quote' => ['message' => trim($message), 'author' => trim($author)],
-            'albums' => Album::query()->select('id', 'title', 'slug', 'image_path')->get(),
+            'albums' => Inertia::once(fn () => Album::query()->select(['title', 'slug', 'image_path'])->get()),
             'auth' => [
                 'user' => $request->user()
             ],

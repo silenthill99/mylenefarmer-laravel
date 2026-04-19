@@ -15,7 +15,7 @@ const NavMenuDesktop = ({NavItemButton}: Props) => {
         return url.startsWith(link);
     };
     return (
-        <ul className={'flex gap-2'}>
+        <ul className={'hidden md:flex gap-2'}>
             {NavItemButton.map((item, index) => (
                 <li key={index}>
                     {item.isDropdown ? (
