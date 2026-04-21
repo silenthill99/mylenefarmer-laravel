@@ -10,7 +10,12 @@ createServer((page) =>
         page,
         render: ReactDOMServer.renderToString,
         title: (title) => title ? `${title} - ${appName}` : appName,
-        resolve: (name) => resolvePageComponent(`./pages/${name}.tsx`, import.meta.glob('./pages/**/*.tsx')),
+        resolve: async (name) => {
+            const pages = import.meta.glob('./pages/**/*.tsx') as Record<string, () => Promise<{ default: React.ComponentType }>>;
+            const resolvedPage = await resolvePageComponent<{ default: React.ComponentType }>(`./pages/${name}.tsx`, pages);
+
+            return resolvedPage.default;
+        },
         setup: ({ App, props }) => {
             return <App {...props} />;
         },

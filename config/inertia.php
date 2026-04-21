@@ -15,16 +15,16 @@ return [
     |
     */
 
-    'ssr' => [
-        'enabled' => true,
-        'url' => 'http://127.0.0.1:13714',
-        // 'bundle' => base_path('bootstrap/ssr/ssr.mjs'),
-
-    ],
+//    'ssr' => [
+//        'enabled' => true,
+//        'url' => 'http://127.0.0.1:13714',
+//        // 'bundle' => base_path('bootstrap/ssr/ssr.mjs'),
+//
+//    ],
 
     /*
     |--------------------------------------------------------------------------
-    | Testing
+    | Pages
     |--------------------------------------------------------------------------
     |
     | The values described here are used to locate Inertia components on the
@@ -33,15 +33,15 @@ return [
     |
     */
 
-    'testing' => [
+    'pages' => [
 
-        'ensure_pages_exist' => true,
+        'ensure_pages_exist' => false,
 
-        'page_paths' => [
+        'paths' => [
             resource_path('js/pages'),
         ],
 
-        'page_extensions' => [
+        'extensions' => [
             'js',
             'jsx',
             'svelte',
@@ -49,6 +49,18 @@ return [
             'tsx',
             'vue',
         ],
+
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Testing
+    |--------------------------------------------------------------------------
+    */
+
+    'testing' => [
+
+        'ensure_pages_exist' => true,
 
     ],
 

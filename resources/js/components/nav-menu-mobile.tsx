@@ -36,7 +36,7 @@ const NavMenuMobile = ({NavItemButton}: Props) => {
                 <ul>
                     {NavItemButton.map((item: MenuNav) =>
                         item.isDropdown ? (
-                            <Accordion type={'single'} collapsible>
+                            <Accordion type={'single'} collapsible key={item.name}>
                                 <AccordionItem value={'clips'}>
                                     <AccordionTrigger>{item.name}</AccordionTrigger>
                                     <AccordionContent>
@@ -51,7 +51,7 @@ const NavMenuMobile = ({NavItemButton}: Props) => {
                                 </AccordionItem>
                             </Accordion>
                         ) : (
-                            <li className={'text-sm'}>{item.name}</li>
+                            <li className={'text-sm'} key={item.name}>{item.name}</li>
                         ),
                     )}
                 </ul>
