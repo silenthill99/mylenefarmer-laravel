@@ -7,7 +7,7 @@ import storage from '@/routes/storage';
 export default function Welcome() {
     const { albums } = usePage<SharedData>().props
     return (
-        <PageLayout className={'flex items-center justify-center gap-10 text-[32px] text-white'}>
+        <PageLayout className={'flex flex-col lg:flex-row items-center justify-center gap-10 text-[32px] text-white'}>
             <Head title="Welcome">
                 <link rel="preconnect" href="https://fonts.bunny.net" />
                 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />

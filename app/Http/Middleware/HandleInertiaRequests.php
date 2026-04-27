@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\Album;
+use App\Models\Concert;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -45,6 +46,7 @@ class HandleInertiaRequests extends Middleware
             'name' => config('app.name'),
             'quote' => ['message' => trim($message), 'author' => trim($author)],
             'albums' => Inertia::once(fn () => Album::query()->select(['title', 'slug', 'image_path'])->get()),
+            'concerts' => Inertia::once(fn () => Concert::query()->select(['name', 'slug'])->get()),
             'auth' => [
                 'user' => $request->user()
             ],

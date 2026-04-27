@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ConcertResource;
 use App\Models\Concert;
 use App\Http\Requests\StoreConcertRequest;
 use App\Http\Requests\UpdateConcertRequest;
+use Illuminate\Support\Facades\Gate;
+use Inertia\Inertia;
 
 class ConcertController extends Controller
 {
@@ -13,7 +16,11 @@ class ConcertController extends Controller
      */
     public function index()
     {
-        //
+        Gate::authorize('view-any', Concert::class);
+        $concerts = Concert::all();
+        return Inertia::render('concerts/index', [
+            'concerts' => ConcertResource::collection($concerts),
+        ]);
     }
 
     /**

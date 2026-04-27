@@ -184,7 +184,7 @@ Use Wayfinder to generate TypeScript functions for Laravel routes. Import from `
 
 ## Pest
 
-- This project uses Pest for testing. Create tests: `php artisan make:test --pest {name}`.
+- This project uses Pest for testing. Index tests: `php artisan make:test --pest {name}`.
 - Run tests: `php artisan test --compact` or filter: `php artisan test --compact --filter=testName`.
 - Do NOT delete tests without approval.
 

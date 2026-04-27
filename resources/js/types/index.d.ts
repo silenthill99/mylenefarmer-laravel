@@ -13,7 +13,8 @@ export interface SharedData {
     flash: {
         success: string | null;
     }
-    albums: Album[]
+    albums: Album[];
+    concerts: Concert[];
 }
 
 export interface Role {
@@ -56,4 +57,18 @@ export interface MenuNav {
     link?: string,
     isDropdown?: boolean,
     children?: MenuNav[]
+}
+
+export interface Concert {
+    id: number;
+    name: string;
+    slug: string;
+    affiche_path: string;
+    setlist: string;
+    start_date: string;
+    end_date: string;
+    alert_message?: string;
+    filmed_at?: string;
+    created_at?: string;
+    updated_at?: string;
 }

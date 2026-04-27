@@ -12,6 +12,7 @@ import {
 import { Link, usePage } from '@inertiajs/react';
 import { dashboard, home } from '@/routes';
 import albums from '@/routes/albums';
+import concerts from '@/routes/concerts';
 
 const navItems = [
     {
@@ -22,6 +23,10 @@ const navItems = [
         title: 'Liste des albums',
         url: albums.index().url,
     },
+    {
+        title: 'Liste des concerts',
+        url: concerts.index().url
+    }
 ];
 
 const AppSidebar = () => {
