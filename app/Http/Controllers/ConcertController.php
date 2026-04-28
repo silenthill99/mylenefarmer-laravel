@@ -7,6 +7,7 @@ use App\Models\Concert;
 use App\Http\Requests\StoreConcertRequest;
 use App\Http\Requests\UpdateConcertRequest;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class ConcertController extends Controller
@@ -17,10 +18,7 @@ class ConcertController extends Controller
     public function index()
     {
         Gate::authorize('view-any', Concert::class);
-        $concerts = Concert::all();
-        return Inertia::render('concerts/index', [
-            'concerts' => ConcertResource::collection($concerts),
-        ]);
+        return Inertia::render('concerts/index');
     }
 
     /**
@@ -28,7 +26,7 @@ class ConcertController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('concerts/create');
     }
 
     /**
@@ -36,7 +34,13 @@ class ConcertController extends Controller
      */
     public function store(StoreConcertRequest $request)
     {
-        //
+        $data = $request->validated();
+        $image = $request->file('affiche');
+        $data['affiche_path'] = $image->store('images/concerts', 'public');
+
+        Concert::create($data);
+
+        return Redirect::route('concerts.index');
     }
 
     /**

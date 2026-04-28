@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Concert;
+use App\Policies\ConcertPolicy;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreConcertRequest extends FormRequest
 {
@@ -11,7 +14,7 @@ class StoreConcertRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::user()->can('create', Concert::class);
     }
 
     /**
@@ -22,7 +25,13 @@ class StoreConcertRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "name" => ["required", "string", "max:255"],
+            "affiche" => ["required", "file", "mimetypes:image/jpeg,image/png", "max:8000"],
+            "setlist" => ["required", "string"],
+            "start_date" => ["required", "date"],
+            "end_date" => ["required", "date", "date_format:Y-m-d"],
+            "alert_message" => ["nullable", "string"],
+            "filmed_at" => ["required", "string", "max:255"],
         ];
     }
 }
