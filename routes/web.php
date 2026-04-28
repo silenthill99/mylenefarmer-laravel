@@ -27,6 +27,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::resource('albums', AlbumController::class)->only('show');
+Route::resource('concerts', ConcertController::class)->only('show');
 
 Route::middleware('guest')->group(function () {
     Route::get('/register', [RegisteredUserController::class, 'create'])->name('registered-user.create');

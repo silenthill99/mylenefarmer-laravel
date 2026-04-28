@@ -138,6 +138,9 @@
     button {
         cursor: pointer;
     }
+    h1 {
+        @apply text-5xl py-5 font-semibold;
+    }
 }
 
 @theme {

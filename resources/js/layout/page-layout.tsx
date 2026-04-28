@@ -6,6 +6,7 @@ import registeredUser from '@/routes/registered-user';
 import clips from '@/routes/clips';
 import { cn } from '@/lib/utils';
 import AlbumController from '@/actions/App/Http/Controllers/AlbumController';
+import ConcertController from '@/actions/App/Http/Controllers/ConcertController';
 import NavMenuDesktop from '@/components/nav-menu-desktop';
 import NavMenuMobile from '@/components/nav-menu-mobile';
 
@@ -28,7 +29,7 @@ const PageLayout = ({ children, className, ...props}: PropsWithChildren<HTMLAttr
             isDropdown: true,
             children: concerts.map((concert) => ({
                 name: concert.name,
-                link: 'Concert',
+                link: ConcertController.show.url({ concert: concert }),
             })),
         },
     ];

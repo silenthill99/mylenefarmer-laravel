@@ -48,7 +48,9 @@ class ConcertController extends Controller
      */
     public function show(Concert $concert)
     {
-        //
+        return Inertia::render('concerts/show', [
+            'concert' => new ConcertResource($concert),
+        ]);
     }
 
     /**

@@ -24,7 +24,7 @@ const Index = () => {
                     <TableBody>
                         {concerts.map((concert) => (
                             <TableRow key={concert.id}>
-                                <TableCell>{concert.name}</TableCell>
+                                <TableCell><Link href={ConcertController.show({concert: concert})}>{concert.name}</Link></TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from 'react';
 import PageLayout from '@/layout/page-layout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Form } from '@inertiajs/react';
+import { Form, Head } from '@inertiajs/react';
 import ConcertController from '@/actions/App/Http/Controllers/ConcertController';
 import { Input } from '@/components/ui/input';
 import { Label } from '@radix-ui/react-label';
@@ -21,6 +21,7 @@ const Create = () => {
 
     return (
         <PageLayout className={'flex items-center justify-center'}>
+            <Head><title>Ajouter un concert</title></Head>
             <Card className={'w-1/2'}>
                 <CardHeader>
                     <CardTitle>Ajouter un concert</CardTitle>
