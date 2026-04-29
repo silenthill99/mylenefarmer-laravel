@@ -66,6 +66,9 @@ const PageLayout = ({ children, className, ...props}: PropsWithChildren<HTMLAttr
                 </nav>
             </header>
             <main className={cn('grow', className)}>{children}</main>
+            <footer className={"bg-white p-2"}>
+                <p>Les oeuvres présentes sur ce site sont la propriété de leurs auteurs respectifs.</p>
+            </footer>
         </div>
     );
 };

@@ -2,13 +2,13 @@ import React from 'react';
 import SidebarLayout from '@/layout/sidebar-layout';
 import { Head, Link, router, usePage } from '@inertiajs/react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { SharedData } from '@/types';
+import { Concert } from '@/types';
 import ConcertController from '@/actions/App/Http/Controllers/ConcertController';
 import { Button } from '@/components/ui/button';
-import { TrashIcon } from 'lucide-react';
+import { EditIcon, TrashIcon } from 'lucide-react';
 
 const Index = () => {
-    const {concerts} = usePage<SharedData>().props;
+    const { concerts } = usePage<{ concerts: Concert[] }>().props;
     return (
         <SidebarLayout>
             <Head title={'Concerts'} />
@@ -30,6 +30,7 @@ const Index = () => {
                                 <TableCell><Link href={ConcertController.show({concert: concert})}>{concert.name}</Link></TableCell>
                                 <TableCell>
                                     <Button variant={'destructive'} onClick={() => router.delete(ConcertController.destroy.url({concert: concert}))}><TrashIcon/></Button>
+                                    <Button variant={"ghost"} onClick={() => router.visit(ConcertController.edit.url({concert: concert}))}><EditIcon/></Button>
                                 </TableCell>
                             </TableRow>
                         ))}

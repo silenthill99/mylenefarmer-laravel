@@ -6,6 +6,7 @@ use App\Http\Resources\ConcertResource;
 use App\Models\Concert;
 use App\Http\Requests\StoreConcertRequest;
 use App\Http\Requests\UpdateConcertRequest;
+use App\Services\ImageStorageService;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -18,7 +19,10 @@ class ConcertController extends Controller
     public function index()
     {
         Gate::authorize('view-any', Concert::class);
-        return Inertia::render('concerts/index');
+        $concerts = Concert::all();
+        return Inertia::render('concerts/index', [
+            'concerts' => ConcertResource::collection($concerts),
+        ]);
     }
 
     /**
@@ -59,15 +63,25 @@ class ConcertController extends Controller
      */
     public function edit(Concert $concert)
     {
-        //
+        Gate::authorize('update', $concert);
+        return Inertia::render('concerts/edit', [
+            'concert' => new ConcertResource($concert),
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateConcertRequest $request, Concert $concert)
+    public function update(UpdateConcertRequest $request, Concert $concert, ImageStorageService $service)
     {
-        //
+        $data = $request->validated();
+        if ($request->hasFile('affiche')) {
+            $service->deleteImage($concert->affiche_path);
+            $image = $request->file('affiche');
+            $data['affiche_path'] = $image->store('images/concerts', 'public');
+        }
+        $concert->update($data);
+        return Redirect::route('concerts.show', $concert);
     }
 
     /**

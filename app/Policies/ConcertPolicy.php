@@ -29,7 +29,7 @@ class ConcertPolicy
      */
     public function update(User $user, Concert $concert): bool
     {
-        return false;
+        return $user->can('isAdmin');
     }
 
     /**

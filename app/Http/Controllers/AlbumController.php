@@ -6,6 +6,7 @@ use App\Http\Requests\StoreAlbumRequest;
 use App\Http\Requests\UpdateAlbumRequest;
 use App\Http\Resources\AlbumResource;
 use App\Models\Album;
+use App\Services\ImageStorageService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
@@ -72,15 +73,13 @@ class AlbumController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAlbumRequest $request, Album $album)
+    public function update(UpdateAlbumRequest $request, Album $album, ImageStorageService $imageStorageService)
     {
         Gate::authorize('update', $album);
         $data = array_filter($request->validated(), fn ($value) => ! is_null($value));
         if ($request->hasFile('image')) {
-            $this->deleteImage($album->image_path);
-
-            $image_name = time() . "_" . $data['image']->getClientOriginalName();
-            $data['image_path'] = $data['image']->storeAs('images/albums', $image_name, 'public');
+            $imageStorageService->deleteImage($album->image_path);
+            $data['image_path'] = $data['image']->store('images/albums', 'public');
         }
 
         $album->update($data);
@@ -90,18 +89,11 @@ class AlbumController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Album $album)
+    public function destroy(Album $album, ImageStorageService $service)
     {
         Gate::authorize('create', $album);
         $album->delete();
-        $this->deleteImage($album->image_path);
+        $service->deleteImage($album->image_path);
         return Redirect::route('albums.index')->with('success', "Album supprimé avec succès !");
-    }
-
-    private function deleteImage(string $image_link)
-    {
-        if (Storage::disk('public')->exists($image_link)) {
-            Storage::disk('public')->delete($image_link);
-        }
     }
 }
