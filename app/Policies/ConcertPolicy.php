@@ -17,14 +17,6 @@ class ConcertPolicy
     }
 
     /**
-     * Determine whether the user can view the model.
-     */
-    public function view(User $user, Concert $concert): bool
-    {
-        return false;
-    }
-
-    /**
      * Determine whether the user can create models.
      */
     public function create(User $user): bool
@@ -45,7 +37,7 @@ class ConcertPolicy
      */
     public function delete(User $user, Concert $concert): bool
     {
-        return false;
+        return $user->can('isAdmin');
     }
 
     /**

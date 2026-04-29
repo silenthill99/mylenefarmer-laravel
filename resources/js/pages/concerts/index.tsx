@@ -1,9 +1,11 @@
 import React from 'react';
 import SidebarLayout from '@/layout/sidebar-layout';
-import { Head, Link, usePage } from '@inertiajs/react';
+import { Head, Link, router, usePage } from '@inertiajs/react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { SharedData } from '@/types';
 import ConcertController from '@/actions/App/Http/Controllers/ConcertController';
+import { Button } from '@/components/ui/button';
+import { TrashIcon } from 'lucide-react';
 
 const Index = () => {
     const {concerts} = usePage<SharedData>().props;
@@ -19,12 +21,16 @@ const Index = () => {
                     <TableHeader>
                         <TableRow>
                             <TableHead>Concert</TableHead>
+                            <TableHead>Action</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
                         {concerts.map((concert) => (
                             <TableRow key={concert.id}>
                                 <TableCell><Link href={ConcertController.show({concert: concert})}>{concert.name}</Link></TableCell>
+                                <TableCell>
+                                    <Button variant={'destructive'} onClick={() => router.delete(ConcertController.destroy.url({concert: concert}))}><TrashIcon/></Button>
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

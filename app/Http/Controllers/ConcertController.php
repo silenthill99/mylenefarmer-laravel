@@ -26,6 +26,7 @@ class ConcertController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create', Concert::class);
         return Inertia::render('concerts/create');
     }
 
@@ -74,6 +75,8 @@ class ConcertController extends Controller
      */
     public function destroy(Concert $concert)
     {
-        //
+        Gate::authorize('delete', $concert);
+        $concert->delete();
+        return Redirect::route('concerts.index');
     }
 }
