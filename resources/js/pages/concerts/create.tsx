@@ -20,9 +20,9 @@ const Create = () => {
     }
 
     return (
-        <PageLayout className={'flex items-center justify-center'}>
+        <PageLayout className={'flex items-center justify-center my-20'}>
             <Head><title>Ajouter un concert</title></Head>
-            <Card className={'w-1/2'}>
+            <Card className={'w-3/4 lg:w-1/2'}>
                 <CardHeader>
                     <CardTitle>Ajouter un concert</CardTitle>
                 </CardHeader>
