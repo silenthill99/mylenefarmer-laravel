@@ -1,11 +1,10 @@
 import PageLayout from '@/layout/page-layout';
 import { Head, usePage } from '@inertiajs/react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
-import { SharedData } from '@/types';
 import storage from '@/routes/storage';
 
 export default function Welcome() {
-    const { albums } = usePage<SharedData>().props
+    const { albums } = usePage().props
     return (
         <PageLayout className={'flex flex-col lg:flex-row items-center justify-center gap-10 text-[32px] text-white'}>
             <Head title="Welcome">

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import SidebarLayout from '@/layout/sidebar-layout';
 import { Head, Link, router, usePage } from '@inertiajs/react';
-import { SharedData } from '@/types';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { SquarePenIcon, TrashIcon } from 'lucide-react';
@@ -10,7 +9,7 @@ import { Toaster } from '@/components/ui/sonner';
 import { toast } from 'sonner';
 
 const Index = () => {
-    const {albums, flash} = usePage<SharedData>().props
+    const {albums, flash} = usePage().props
 
     useEffect(() => {
         if (!flash.success) return;

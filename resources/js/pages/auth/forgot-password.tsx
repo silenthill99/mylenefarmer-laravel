@@ -6,11 +6,10 @@ import { Button } from '@/components/ui/button';
 import password from '@/routes/password';
 import AuthenticatedLayout from '@/layout/AuthenticatedLayout';
 import { Toaster } from '@/components/ui/sonner';
-import { SharedData } from '@/types';
 import { toast } from 'sonner';
 
 const ForgotPassword = () => {
-    const { flash } = usePage<SharedData>().props;
+    const { flash } = usePage().props;
 
     useEffect(() => {
         if (!flash.success) return;

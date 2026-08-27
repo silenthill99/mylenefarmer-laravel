@@ -1,6 +1,6 @@
 import React, { HTMLAttributes, PropsWithChildren } from 'react';
 import { Link, usePage } from '@inertiajs/react';
-import { MenuNav, SharedData } from '@/types';
+import { MenuNav} from '@/types';
 import { dashboard, home, login, logout } from '@/routes';
 import registeredUser from '@/routes/registered-user';
 import clips from '@/routes/clips';
@@ -11,7 +11,7 @@ import NavMenuDesktop from '@/components/nav-menu-desktop';
 import NavMenuMobile from '@/components/nav-menu-mobile';
 
 const PageLayout = ({ children, className, ...props}: PropsWithChildren<HTMLAttributes<HTMLElement> & {className?: string}>) => {
-    const { auth, albums, concerts } = usePage<SharedData>().props;
+    const { auth, albums, concerts } = usePage().props;
 
     const NavItemButton: MenuNav[] = [
         { name: "Page d'accueil", link: home.url() },

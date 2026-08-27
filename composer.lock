@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f174dbe824783a0a3eb0641ebc7f7882",
+    "content-hash": "a845f432ea05b2a691deca893b6244f2",
     "packages": [
         {
             "name": "brick/math",
@@ -6536,16 +6536,16 @@
         },
         {
             "name": "fruitcake/laravel-debugbar",
-            "version": "v4.2.7",
+            "version": "v4.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fruitcake/laravel-debugbar.git",
-                "reference": "e9863784b8ee42f7a4393bea90a0750f632df779"
+                "reference": "3d76ea8d78b82225b92789de65fc630c1cd8e80c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fruitcake/laravel-debugbar/zipball/e9863784b8ee42f7a4393bea90a0750f632df779",
-                "reference": "e9863784b8ee42f7a4393bea90a0750f632df779",
+                "url": "https://api.github.com/repos/fruitcake/laravel-debugbar/zipball/3d76ea8d78b82225b92789de65fc630c1cd8e80c",
+                "reference": "3d76ea8d78b82225b92789de65fc630c1cd8e80c",
                 "shasum": ""
             },
             "require": {
@@ -6622,7 +6622,7 @@
             ],
             "support": {
                 "issues": "https://github.com/fruitcake/laravel-debugbar/issues",
-                "source": "https://github.com/fruitcake/laravel-debugbar/tree/v4.2.7"
+                "source": "https://github.com/fruitcake/laravel-debugbar/tree/v4.3.0"
             },
             "funding": [
                 {
@@ -6634,7 +6634,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-04-18T17:01:20+00:00"
+            "time": "2026-06-04T07:54:01+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -9960,7 +9960,8 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.2"
+        "php": "^8.4",
+        "ext-pdo": "*"
     },
     "platform-dev": {},
     "plugin-api-version": "2.9.0"

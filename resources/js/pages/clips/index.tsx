@@ -1,14 +1,13 @@
 import { Button } from '@/components/ui/button';
 import YoutubeVideos from '@/components/youtube-videos';
 import PageLayout from '@/layout/page-layout';
-import { SharedData } from '@/types';
 import { Clips } from '@/types/clips';
 import { Head, router, usePage } from '@inertiajs/react';
 import { create } from '@/routes/clips';
 import { getVideoId } from '@/components/getVideoId';
 
 const Index = () => {
-    const { clips, auth, can_create } = usePage<SharedData & { clips: Clips[], can_create: boolean }>().props;
+    const { clips, auth, can_create } = usePage<{ clips: Clips[], can_create: boolean }>().props;
     return (
         <PageLayout className={'container mx-auto mt-5 flex flex-col items-start pb-20'}>
             <Head title={"Les clips"}/>
