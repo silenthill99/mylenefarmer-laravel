@@ -94,6 +94,7 @@ class AlbumController extends Controller
         Gate::authorize('create', $album);
         $album->delete();
         $service->deleteImage($album->image_path);
-        return Redirect::route('albums.index')->with('success', "Album supprimé avec succès !");
+        Inertia::flash('success', "Album supprimé avec succès !");
+        return Redirect::route('albums.index');
     }
 }

@@ -23,7 +23,7 @@ class PasswordResetLinkController extends Controller
         );
 
         return $status === Password::ResetLinkSent
-            ? back()->with("status", __($status))->with("success", "Un email de reset de mot de passe vous a été envoyé.")
+            ? Inertia::flash(["status" => __($status), "success" => "Un email de reset de mot de passe vous a été envoyé."])->back()
             : back()->withErrors(['email' => __($status)]);
     }
 }

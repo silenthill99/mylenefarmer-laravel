@@ -43,7 +43,7 @@ class NewPasswordController extends Controller
         );
 
         return $status === Password::PasswordReset
-            ? redirect()->route('login')->with('status', __($status))
+            ? tap(redirect()->route('login'), fn () => Inertia::flash('status', __($status)))
             : back()->withErrors(['email' => __($status)]);
     }
 }

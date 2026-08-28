@@ -9,7 +9,7 @@ import { Toaster } from '@/components/ui/sonner';
 import { toast } from 'sonner';
 
 const ForgotPassword = () => {
-    const { flash } = usePage().props;
+    const { flash } = usePage();
 
     useEffect(() => {
         if (!flash.success) return;

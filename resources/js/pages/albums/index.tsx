@@ -9,7 +9,8 @@ import { Toaster } from '@/components/ui/sonner';
 import { toast } from 'sonner';
 
 const Index = () => {
-    const {albums, flash} = usePage().props
+    const {albums} = usePage().props
+    const {flash} = usePage()
 
     useEffect(() => {
         if (!flash.success) return;

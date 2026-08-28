@@ -24,8 +24,6 @@
 
             $remember = $request->boolean('remember');
 
-            Auth::attempt($data, $remember);
-
             if (Auth::attempt($data, $remember)) {
                 $request->session()->regenerate();
                 return Redirect::intended(route('home', absolute: false));

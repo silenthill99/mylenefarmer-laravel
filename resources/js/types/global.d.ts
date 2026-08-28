@@ -9,11 +9,12 @@ declare module "@inertiajs/core" {
             auth: Auth;
             ziggy: Config & { location: string };
             [key: string]: unknown;
-            flash: {
-                success: string | null;
-            }
             albums: Album[];
             concerts: Concert[];
+        }
+        flashDataType: {
+            success?: string;
+            status?: string;
         }
     }
 }
