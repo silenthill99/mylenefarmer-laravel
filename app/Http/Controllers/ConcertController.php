@@ -31,7 +31,10 @@ class ConcertController extends Controller
     public function create()
     {
         Gate::authorize('create', Concert::class);
-        return Inertia::render('concerts/create');
+        $concerts = Concert::all();
+        return Inertia::render('concerts/create', [
+            'concerts' => ConcertResource::collection($concerts),
+        ]);
     }
 
     /**

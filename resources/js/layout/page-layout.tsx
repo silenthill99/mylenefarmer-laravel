@@ -11,7 +11,7 @@ import NavMenuDesktop from '@/components/nav-menu-desktop';
 import NavMenuMobile from '@/components/nav-menu-mobile';
 
 const PageLayout = ({ children, className, ...props}: PropsWithChildren<HTMLAttributes<HTMLElement> & {className?: string}>) => {
-    const { auth, albums, concerts } = usePage().props;
+    const { auth, menuAlbums, menuConcerts } = usePage().props;
 
     const NavItemButton: MenuNav[] = [
         { name: "Page d'accueil", link: home.url() },
@@ -19,7 +19,7 @@ const PageLayout = ({ children, className, ...props}: PropsWithChildren<HTMLAttr
         {
             name: 'Albums',
             isDropdown: true,
-            children: albums.map((album) => ({
+            children: menuAlbums.map((album) => ({
                 name: 'Album ' + album.title,
                 link: AlbumController.show.url({ album: album }),
             })),
@@ -27,7 +27,7 @@ const PageLayout = ({ children, className, ...props}: PropsWithChildren<HTMLAttr
         {
             name: 'Concerts',
             isDropdown: true,
-            children: concerts.map((concert) => ({
+            children: menuConcerts.map((concert) => ({
                 name: concert.name,
                 link: ConcertController.show.url({ concert: concert }),
             })),

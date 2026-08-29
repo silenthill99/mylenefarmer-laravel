@@ -4,7 +4,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import storage from '@/routes/storage';
 
 export default function Welcome() {
-    const { albums } = usePage().props
+    const { menuAlbums } = usePage().props
     return (
         <PageLayout className={'flex flex-col lg:flex-row items-center justify-center gap-10 text-[32px] text-white'}>
             <Head title="Welcome">
@@ -18,7 +18,7 @@ export default function Welcome() {
             </p>
             <Carousel className={'w-150'}>
                 <CarouselContent>
-                    {albums.map((album, index) => (
+                    {menuAlbums.map((album, index) => (
                         <CarouselItem key={album.id ?? `${album.title}-${index}`}>
                             <img className={'h-full w-full object-cover'} src={storage.local(album.image_path).url} alt={album.title} />
                         </CarouselItem>

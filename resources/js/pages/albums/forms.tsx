@@ -1,17 +1,23 @@
+import AlbumController from '@/actions/App/Http/Controllers/AlbumController';
 import InputError from '@/components/input-error';
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import PageLayout from '@/layout/page-layout';
-import albums from '@/routes/albums';
-import { Form } from '@inertiajs/react';
-import { ChangeEvent, useState } from 'react';
 import { Textarea } from '@/components/ui/textarea';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Button } from '@/components/ui/button';
+import PageLayout from '@/layout/page-layout';
+import storage from '@/routes/storage';
+import { Album } from '@/types';
+import { Form, usePage } from '@inertiajs/react';
+import { ChangeEvent, useState } from 'react';
 
-const Create = () => {
-    const [preview, setPreview] = useState<string | null>(null);
+const Forms = () => {
+    const { album } = usePage<{ album: Album }>().props;
+    const active = !!album.slug;
+    const action = active ? AlbumController.update.form(album) : AlbumController.store.form();
+
+    const [preview, setPreview] = useState<string | null>(active ? storage.local(album.image_path).url : null);
 
     function handleChange(e: ChangeEvent<HTMLInputElement>) {
         const file = e.target.files?.[0];
@@ -24,15 +30,21 @@ const Create = () => {
         <PageLayout className={'flex items-center justify-center'}>
             <Card className={'w-1/2'}>
                 <CardHeader>
-                    <CardTitle>Ajouter un album</CardTitle>
+                    <CardTitle>{active ? 'Modifier un album' : 'Ajouter un album'}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <Form {...albums.store.form()}>
+                    <Form {...action}>
                         {({ errors, processing }) => (
                             <div className={'space-y-4'}>
                                 <div>
                                     <Label htmlFor={'title'}>Titre de l'album</Label>
-                                    <Input id={'title'} name={'title'} placeholder={"Titre de l'album"} aria-invalid={!!errors.title} />
+                                    <Input
+                                        id={'title'}
+                                        name={'title'}
+                                        placeholder={"Titre de l'album"}
+                                        aria-invalid={!!errors.title}
+                                        defaultValue={album.title}
+                                    />
                                     <InputError message={errors.title} />
                                 </div>
                                 <div>
@@ -53,46 +65,50 @@ const Create = () => {
                                     <Textarea
                                         id={'tracklist'}
                                         name={'tracklist'}
-                                        className={"resize-none"}
+                                        className={'resize-none'}
                                         aria-invalid={!!errors.tracklist}
+                                        defaultValue={album.tracklist}
                                     />
-                                    <InputError message={errors.tracklist}/>
+                                    <InputError message={errors.tracklist} />
                                 </div>
                                 <div>
-                                    <Label htmlFor={"deezer_url"}>Lien Deezer</Label>
+                                    <Label htmlFor={'deezer_url'}>Lien Deezer</Label>
                                     <Input
                                         type={'url'}
                                         id={'deezer_url'}
                                         name={'deezer_url'}
                                         aria-invalid={!!errors.deezer_url}
+                                        defaultValue={album.deezer_url}
                                     />
-                                    <InputError message={errors.deezer_url}/>
+                                    <InputError message={errors.deezer_url} />
                                 </div>
                                 <div>
-                                    <Label htmlFor={"spotify_url"}>Lien Spotify</Label>
+                                    <Label htmlFor={'spotify_url'}>Lien Spotify</Label>
                                     <Input
-                                        type={"url"}
+                                        type={'url'}
                                         id={'spotify_url'}
-                                        name={"spotify_url"}
+                                        name={'spotify_url'}
                                         aria-invalid={!!errors.spotify_url}
+                                        defaultValue={album.spotify_url}
                                     />
-                                    <InputError message={errors.spotify_url}/>
+                                    <InputError message={errors.spotify_url} />
                                 </div>
                                 <div>
                                     <Label htmlFor={'apple_music_url'}>Lien Apple Music</Label>
                                     <Input
-                                        type={"url"}
-                                        id={"apple_music_url"}
-                                        name={"apple_music_url"}
+                                        type={'url'}
+                                        id={'apple_music_url'}
+                                        name={'apple_music_url'}
                                         aria-invalid={!!errors.apple_music_url}
+                                        defaultValue={album.apple_music_url}
                                     />
-                                    <InputError message={errors.apple_music_url}/>
+                                    <InputError message={errors.apple_music_url} />
                                 </div>
-                                <div className={"flex gap-2 items-center"}>
-                                    <input type={"hidden"} name={"coming_soon"} value={0}/>
-                                    <Checkbox id={"coming_soon"} name={"coming_soon"} value={1}/>
+                                <div className={'flex items-center gap-2'}>
+                                    <input type={'hidden'} name={'coming_soon'} value={0} />
+                                    <Checkbox id={'coming_soon'} name={'coming_soon'} value={1} defaultChecked={album.coming_soon} />
                                     <Label htmlFor={'coming_soon'}>Sortie à venir</Label>
-                                    <InputError message={errors.coming_soon}/>
+                                    <InputError message={errors.coming_soon} />
                                 </div>
                                 <Button disabled={processing}>Créer l'album</Button>
                             </div>
@@ -104,4 +120,4 @@ const Create = () => {
     );
 };
 
-export default Create;
+export default Forms;

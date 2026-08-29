@@ -21,7 +21,10 @@ class AlbumController extends Controller
     public function index()
     {
         Gate::authorize("viewAny", Album::class);
-        return Inertia::render('albums/index');
+        $albums = Album::all();
+        return Inertia::render('albums/index', [
+            'albums' => AlbumResource::collection($albums),
+        ]);
     }
 
     /**
@@ -30,7 +33,12 @@ class AlbumController extends Controller
     public function create()
     {
         Gate::authorize('viewAny', Album::class);
-        return Inertia::render('albums/create');
+
+        $album = new Album();
+
+        return Inertia::render('albums/forms', [
+            "album" => new AlbumResource($album)
+        ]);
     }
 
     /**
@@ -65,7 +73,7 @@ class AlbumController extends Controller
     {
         Gate::authorize('update', $album);
 
-        return Inertia::render('albums/edit', [
+        return Inertia::render('albums/forms', [
             'album' => new AlbumResource($album)
         ]);
     }
